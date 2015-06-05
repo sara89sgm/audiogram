@@ -1,0 +1,15 @@
+require.config({
+	paths: {
+		'jquery' : "vendor/jquery-2.1.0.min",
+		'recorderWorker' :'recorderWorker'
+	}
+
+});
+
+require(['jquery', 'audioRecord'], function($, AudioRecord){
+
+	AudioRecord.init('.recordButton');
+
+
+
+});

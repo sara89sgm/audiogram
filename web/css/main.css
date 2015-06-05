@@ -1,0 +1,157 @@
+/** BASE **/
+html, body, div, span, p, a, del, em, img, ol, ul, li, fieldset, form, label {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+html, body {
+	line-height: 1;
+	min-height:100%;
+	font-family:Artial, Verdana, sans-serif;
+}
+
+body{
+	padding: 40px;
+}
+
+ul{
+	list-style-type: none;
+}
+
+/** SECTIONS **/
+
+section{
+	margin-bottom: 10em;
+	width: 100%;
+
+}
+
+/** HEADER - SEARCHER **/
+
+section #header {
+	min-height: 500px;
+}
+
+#header .bcg {
+	background-color: #FFFFFF;
+	background-size: cover;
+}
+
+
+#header .content .box{
+	margin: auto;
+	margin-top: 5em;
+	color: #FFFFFF;
+	width:80%;
+	top:1em;
+	padding:2em;
+	background-color: rgba(16, 16, 16, 0.8); 
+	text-align:center;
+	border-radius:1em;
+
+	-webkit-transform-origin:0 0;
+	-moz-transform-origin:0 0;
+	-ms-transform-origin:0 0;
+	-o-transform-origin:0 0;
+	transform-origin:0 0;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/*------Search ------ */
+
+#search-btn {
+	background:#0099ff;
+	color:white;
+	font: 'trebuchet ms', trebuchet;
+	padding:10px 20px;
+	border-radius:0 10px 10px 0;
+	-moz-border-radius:0 10px 10px 0;
+	-webkit-border-radius:0 10px 10px 0;
+	-o-border-radius:0 10px 10px 0;
+	border:0 none;
+	font-weight:bold;
+}
+ 
+#search-box {
+	color: #000;
+	background: #eee;
+	padding:10px;
+	 border-radius:10px 0 0 10px;
+	-moz-border-radius:10px 0 0 10px;
+	-webkit-border-radius:10px 0 0 10px;
+	-o-border-radius:10px 0 0 10px;
+	border:0 none;
+	width:30%;
+	font-weight:bold;
+ }
+
+
+/** TOP CONTENT **/
+
+#top-content .bcg {
+	background-size: cover;
+	width: 100%;
+}
+
+
+#top-content .bcg .boxes{
+
+	text-align: center;
+	margin: auto;
+	width: 100%;
+	display: block;
+}
+
+#top-content .bcg .box{
+	border-radius:1em;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	float: left;
+	margin-right: 1%;
+	margin-left: 1%;
+	margin-top: 20px; 
+	background-color: rgba(16, 16, 16, 0.8); 
+	width: 31%;
+	padding: 15px;
+	color: #FFFFFF
+}
+
+#top-content .bcg .box .title{
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+/*-----GRAFICA------ */
+
+.main-graph{
+	
+	min-height: 500px;
+	display: block;
+	text-align: center;
+	margin-bottom: 10em;
+}
+
+.main-graph h2{
+	color: #000;
+}
+
+
+/** NAV BAR **/
+
+
+/** COLUMNS RESPONSIVE **/
+
+
