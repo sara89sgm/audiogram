@@ -21,14 +21,11 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 $app['debug'] = true;
 
-$app->get('/', function() {
-    return 'Hello!';
-});
 $app->get('/php', function() {
     return phpinfo();
 });
 
-$app->get('/home', function() use ($app) {
+$app->get('/', function() use ($app) {
     return $app['twig']->render('index.twig');
 });
 
