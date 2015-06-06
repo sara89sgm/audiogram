@@ -74,7 +74,7 @@ define(['jquery'], function($) {
 		},
 
 		applyFilter: function(filter){
-			audioNode = rec.getNode();
+			var audioNode = rec.getNode();
 
 			switch(filter){
 				  case 0:
