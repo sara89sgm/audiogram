@@ -86,9 +86,7 @@ define(['jquery'], function($) {
 			  	var audiogramObject = new AudiogramItem();
 				audiogramObject.set("username", username);
 				audiogramObject.set("audio", parseFile);
-				audiogramObject.save().then(function(){
-					console.log('file saved');
-				});
+				audiogramObject.save();
 			}, function(error) {
 				console.log("error", error);
 			  // The file either could not be read, or could not be saved to Parse.

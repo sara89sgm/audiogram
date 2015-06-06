@@ -14,9 +14,6 @@ this.onmessage = function(e){
     case 'exportWAV':
       exportWAV(e.data.type);
       break;
-    case 'exportWAV64':
-      exportWAV(e.data.type);
-      break;
     case 'getBuffer':
       getBuffer();
       break;
@@ -44,33 +41,11 @@ function exportWAV(type){
   for (var channel = 0; channel < numChannels; channel++){
     buffers.push(mergeBuffers(recBuffers[channel], recLength));
   }
-  //console.log(btoa(recBuffers[0]));
   if (numChannels === 2){
       var interleaved = interleave(buffers[0], buffers[1]);
   } else {
       var interleaved = buffers[0];
   }
-  console.log(btoa(interleaved));
-  var dataview = encodeWAV(interleaved);
-  var audioBlob = new Blob([dataview], { type: type });
-
-  this.postMessage(audioBlob);
-}
-
-function exportWAV64(type){
-  var buffers = [];
-  for (var channel = 0; channel < numChannels; channel++){
-    buffers.push(mergeBuffers(recBuffers[channel], recLength));
-  }
-  //console.log(btoa(recBuffers[0]));
-  if (numChannels === 2){
-      var interleaved = interleave(buffers[0], buffers[1]);
-  } else {
-      var interleaved = buffers[0];
-  }
-  //console.log(btoa(interleaved));
-  //b64Audio = btoa(interleaved);
-  //context.createBufferSource(atob(b64Audio));
   var dataview = encodeWAV(interleaved);
   var audioBlob = new Blob([dataview], { type: type });
 

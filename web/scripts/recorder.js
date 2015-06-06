@@ -6,7 +6,7 @@
   var Recorder = function(source, cfg){
     var config = cfg || {};
     var bufferLen = config.bufferLen || 4096;
-    var numChannels = config.numChannels || 1;
+    var numChannels = config.numChannels || 2;
     this.context = source.context;
     this.node = (this.context.createScriptProcessor ||
                  this.context.createJavaScriptNode).call(this.context,
@@ -101,6 +101,7 @@
     click.initEvent("click", true, true);
     link.dispatchEvent(click);
   }
+
 
   Recorder.getUrl = function(blob, filename){
     var url = (window.URL || window.webkitURL).createObjectURL(blob);
