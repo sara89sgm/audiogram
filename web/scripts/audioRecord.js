@@ -46,10 +46,11 @@ define(['jquery'], function($) {
 			    mediaStream = localMediaStream;
 			    var mediaStreamSource = context.createMediaStreamSource(localMediaStream);
 			    source = mediaStreamSource;
+			    
 			    rec = new Recorder(mediaStreamSource, {
 			      workerPath: '../scripts/recorderWorker.js'
 			    });
-
+				this.applyFilter(1);
 			    rec.record();
 			  }, function(err){
 			    console.log('Not supported');
@@ -59,11 +60,13 @@ define(['jquery'], function($) {
 		stop: function() {
 			mediaStream.stop();
   			rec.stop();
-  			this.applyFilter(1);
+
+  			
 			rec.exportWAV(function(e){
 			   rec.clear();
 			   Recorder.forceDownload(e, "test.wav");
 			   url = Recorder.getUrl(e, 'test.wav');
+			   //this.applyFilter(1,url);
 			   console.log(url);
 			   
 			});
@@ -74,7 +77,7 @@ define(['jquery'], function($) {
 		},
 
 		applyFilter: function(filter){
-			var audioNode = rec.getNode();
+
 
 			switch(filter){
 				  case 0:
