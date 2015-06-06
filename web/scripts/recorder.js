@@ -1,3 +1,4 @@
+/** Written by Matt DIamond **/
 (function(window){
 
   var WORKER_PATH = 'recorderWorker.js';
@@ -68,6 +69,10 @@
       });
     }
 
+    this.getNode = function(){
+      return this.node;
+    }
+
     worker.onmessage = function(e){
       var blob = e.data;
       currCallback(blob);
@@ -91,6 +96,7 @@
     var url = (window.URL || window.webkitURL).createObjectURL(blob);
     return url;
   }
+
 
   window.Recorder = Recorder;
 

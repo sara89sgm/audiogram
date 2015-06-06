@@ -15,11 +15,12 @@ define(['jquery'], function($) {
 	var mediaStream = null,
 	rec = null,
 	url = '',
-	recording = false;
+	recording = false,
+	tuna;
 
 	var priv = {
 
-
+		source : null,
 
 		init: function(recordButtonSelector){
 			$(recordButtonSelector).on('click', function(e){
@@ -34,12 +35,16 @@ define(['jquery'], function($) {
 				}
 			})
 
+
+			tuna = new Tuna(context);
+
 		},
 
 		record: function(stream){
 			  navigator.getUserMedia({audio: true}, function(localMediaStream){
 			    mediaStream = localMediaStream;
 			    var mediaStreamSource = context.createMediaStreamSource(localMediaStream);
+			    source = mediaStreamSource;
 			    rec = new Recorder(mediaStreamSource, {
 			      workerPath: '../scripts/recorderWorker.js'
 			    });
@@ -53,7 +58,7 @@ define(['jquery'], function($) {
 		stop: function() {
 			mediaStream.stop();
   			rec.stop();
-
+  			this.applyFilter(0);
 			rec.exportWAV(function(e){
 			   rec.clear();
 			   Recorder.forceDownload(e, "test.wav");
@@ -65,6 +70,35 @@ define(['jquery'], function($) {
 
 		getUrl : function(){
 			return url;
+		},
+
+		applyFilter: function(filter){
+			audioNode = rec.getNode();
+
+			switch(filter){
+				  case 0:
+				  	var chorus = new tuna.Chorus({
+		                 rate: 1.5,
+		                 feedback: 0.2,
+		                 delay: 0.0045,
+		                 bypass: 0
+		             });
+			        source.connect(chorus.input);
+					chorus.connect(audioNode);
+			        break;
+			    case 1:
+			        var chorus = new tuna.Chorus({
+		                 rate: 1.5,
+		                 feedback: 0.2,
+		                 delay: 0.0045,
+		                 bypass: 0
+		             });
+			        audioNode.connect(chorus.input);
+					chorus.connect(anotherNativeNode);
+			        break;
+
+			}
+
 		}
 
 
