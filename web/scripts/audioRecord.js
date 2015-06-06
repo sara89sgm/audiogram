@@ -16,11 +16,12 @@ define(['jquery'], function($) {
 	rec = null,
 	url = '',
 	recording = false,
+	source : null,
 	tuna;
 
 	var priv = {
 
-		source : null,
+		
 
 		init: function(recordButtonSelector){
 			$(recordButtonSelector).on('click', function(e){
