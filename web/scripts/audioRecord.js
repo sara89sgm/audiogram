@@ -59,7 +59,7 @@ define(['jquery'], function($) {
 		stop: function() {
 			mediaStream.stop();
   			rec.stop();
-  			this.applyFilter(0);
+  			this.applyFilter(1);
 			rec.exportWAV(function(e){
 			   rec.clear();
 			   Recorder.forceDownload(e, "test.wav");
@@ -85,17 +85,20 @@ define(['jquery'], function($) {
 		                 bypass: 0
 		             });
 			        source.connect(chorus.input);
-					chorus.connect(audioNode);
+					chorus.connect(rec.node);
 			        break;
 			    case 1:
-			        var chorus = new tuna.Chorus({
-		                 rate: 1.5,
-		                 feedback: 0.2,
-		                 delay: 0.0045,
-		                 bypass: 0
-		             });
-			        audioNode.connect(chorus.input);
-					chorus.connect(anotherNativeNode);
+					var convolver = new tuna.Convolver({
+	                    highCut: 22050,                         //20 to 22050
+	                    lowCut: 20,                             //20 to 22050
+	                    dryLevel: 1,                            //0 to 1+
+	                    wetLevel: 1,                            //0 to 1+
+	                    level: 1,                               //0 to 1+, adjusts total output of both wet and dry
+	                    impulse: "impulses/impulse_rev.wav",    //the path to your impulse response
+	                    bypass: 0
+	                });
+			        source.connect(chorus.input);
+					chorus.connect(rec.node);
 			        break;
 
 			}
