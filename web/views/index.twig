@@ -26,7 +26,7 @@
  
 </head>
 <body>
-    <div data-role="page" id="one">
+    <div data-role="page" id="home">
 
         {% include 'nav.twig' %}
 
@@ -63,11 +63,14 @@
 
         {% include 'nav.twig' %}
 
-        <div role="main" class="ui-content">
-            
-            <button class='recordButton'> Record </button>
+        <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
 
-        </div><!-- /content -->
+             {% for audiogramitem in audiogramitems %}
+                {% include 'audiogramitem.twig' with {'item': audiogramitem} only %}
+            {% endfor %}
+
+        </ul>
+
         {% include 'footer.twig' %}
 
     </div><!-- /page one -->
