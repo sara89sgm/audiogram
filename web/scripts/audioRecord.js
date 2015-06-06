@@ -98,7 +98,7 @@ define(['jquery'], function($) {
 	                    bypass: 0
 	                });
 			        source.connect(convolver.input);
-					chorus.connect(rec.node);
+					convolver.connect(rec.node);
 			        break;
 
 			}
