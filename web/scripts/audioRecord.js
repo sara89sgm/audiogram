@@ -94,10 +94,10 @@ define(['jquery'], function($) {
 	                    dryLevel: 1,                            //0 to 1+
 	                    wetLevel: 1,                            //0 to 1+
 	                    level: 1,                               //0 to 1+, adjusts total output of both wet and dry
-	                    impulse: "impulses/impulse_rev.wav",    //the path to your impulse response
+	                    impulse: "../scripts/impulses/impulse_rev.wav",    //the path to your impulse response
 	                    bypass: 0
 	                });
-			        source.connect(chorus.input);
+			        source.connect(convolver.input);
 					chorus.connect(rec.node);
 			        break;
 
