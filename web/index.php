@@ -7,6 +7,11 @@ use Symfony\Component\Debug\Debug;
 // ini_set('display_errors', 0);
 
 require_once __DIR__.'/../vendor/autoload.php';
+use Parse\ParseClient;
+use Parse\ParseObject;
+ 
+ParseClient::initialize('u4iFjc0mVSgWBiNYJkDgXzeXbKAGIqoz44tGJsAj', 'l5KOSxl9eEDLG2k8ebnfFFLlyYVNv2tPWiCq4tNq', 'cEoeKfQHEH3NIpTdgF5PlOtPyH7Emn27i8IpvW69');
+
 
 // DISABLE THIS IN PRODUCTION
 Debug::enable();
@@ -26,6 +31,7 @@ $app->get('/php', function() {
 });
 
 $app->get('/', function() use ($app) {
+
     return $app['twig']->render('index.twig');
 });
 

@@ -56,22 +56,14 @@ html, body {
 
 /*****NAV*****/
 
-.ag-footer{
-	position: fixed;
-	bottom:0px;
-	height: 40px;
-	width: 100%;
-	background-color: red;
-}
-.ag-footer .ag-footer-items{
-	padding-top: 15px;
-	padding-left: 10px;
-	width: 100%;
-}
-.ag-footer .ag-footer-items .ag-item{
-	float:left;
-	width: 25%;
-}
+.nav-glyphish-example .ui-btn { padding-top: 40px !important; }
+.nav-glyphish-example .ui-btn:after { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+#icon-about:after { background:  url("../img/atom.png") 50% 50% no-repeat; background-size: 24px 22px; }
+#icon-home:after { background:  url("../img/doghouse.png") 50% 50% no-repeat; background-size: 24px 16px;  }
+#icon-record:after { background:  url("../img/trumpet.png") 50% 50% no-repeat;  background-size: 12px 26px; }
+#icon-social:after { background:  url("../img/at-sign.png") 50% 50% no-repeat;  background-size: 22px 27px; }
+
+
 
 
 

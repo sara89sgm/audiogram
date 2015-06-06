@@ -6,7 +6,7 @@
   var Recorder = function(source, cfg){
     var config = cfg || {};
     var bufferLen = config.bufferLen || 4096;
-    var numChannels = config.numChannels || 2;
+    var numChannels = config.numChannels || 1;
     this.context = source.context;
     this.node = (this.context.createScriptProcessor ||
                  this.context.createJavaScriptNode).call(this.context,
@@ -65,6 +65,16 @@
       if (!currCallback) throw new Error('Callback not set');
       worker.postMessage({
         command: 'exportWAV',
+        type: type
+      });
+    }
+
+    this.exportWAV64 = function(cb, type){
+      currCallback = cb || config.callback;
+      type = type || config.type || 'audio/wav';
+      if (!currCallback) throw new Error('Callback not set');
+      worker.postMessage({
+        command: 'exportWAV64',
         type: type
       });
     }

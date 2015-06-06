@@ -50,7 +50,7 @@ define(['jquery'], function($) {
 			    rec = new Recorder(mediaStreamSource, {
 			      workerPath: '../scripts/recorderWorker.js'
 			    });
-				priv.applyFilter(1);
+				priv.applyFilter(2);
 			    rec.record();
 			  }, function(err){
 			    console.log('Not supported');
@@ -64,9 +64,9 @@ define(['jquery'], function($) {
   			
 			rec.exportWAV(function(e){
 			   rec.clear();
+			   priv.saveWav(e);
 			   Recorder.forceDownload(e, "test.wav");
 			   url = Recorder.getUrl(e, 'test.wav');
-			   //this.applyFilter(1,url);
 			   console.log(url);
 			   
 			});
@@ -74,6 +74,26 @@ define(['jquery'], function($) {
 
 		getUrl : function(){
 			return url;
+		},
+
+		saveWav : function(e, username){
+			var AudiogramItem = Parse.Object.extend("AudiogramItem");
+			var audiogramObject = new AudiogramItem();
+			var parseFile = new Parse.File(username+'.wav', e);
+
+			parseFile.save().then(function() {
+			  	var AudiogramItem = Parse.Object.extend("AudiogramItem");
+			  	var audiogramObject = new AudiogramItem();
+				audiogramObject.set("username", username);
+				audiogramObject.set("audio", parseFile);
+				audiogramObject.save().then(function(){
+					console.log('file saved');
+				});
+			}, function(error) {
+				console.log("error", error);
+			  // The file either could not be read, or could not be saved to Parse.
+			});
+
 		},
 
 		applyFilter: function(filter){
@@ -102,6 +122,43 @@ define(['jquery'], function($) {
 	                });
 			        source.connect(convolver.input);
 					convolver.connect(rec.node);
+			        break;
+			    case 2:
+			    	var wahwah = new tuna.WahWah({
+		                automode: true, //true/false
+		                baseFrequency: 0.5, //0 to 1
+		                excursionOctaves: 3, //1 to 6
+		                sweep: 0, //0 to 1
+		                resonance: 2, //1 to 100
+		                sensitivity: 1, //-1 to 1
+		                bypass: 0
+		            });
+		          	source.connect(wahwah.input);
+					wahwah.connect(rec.node);
+			        break;
+			    case 3:
+		            var phaser = new tuna.Phaser({
+		                rate: 1.2, //0.01 to 8 is a decent range, but higher values are possible
+		                depth: 0.8, //0 to 1
+		                feedback: 0.9, //0 to 1+
+		                stereoPhase: 180, //0 to 180
+		                baseModulationFrequency: 700, //500 to 1500
+		                bypass: 0
+		            });
+		        	source.connect(phaser.input);
+					phaser.connect(rec.node);
+			        break;
+			    case 4:
+
+		            var tremolo = new tuna.Tremolo({
+		                intensity: 0.2, //0 to 1
+		                rate: 8, //0.001 to 8
+		                stereoPhase: 0, //0 to 180
+		                feedback: 0.9, //0 to 1+
+		                bypass: 0
+		            });
+		        	source.connect(tremolo.input);
+					tremolo.connect(rec.node);
 			        break;
 
 			}
