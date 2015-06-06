@@ -67,10 +67,11 @@ define(['jquery'], function($) {
 			   
 			   Recorder.forceDownload(e, "test.wav");
 			   url = Recorder.getUrl(e, 'test.wav');
+
 			   priv.saveWav(e,'sarasgm');
 			   console.log(url);
 			   
-			});
+			}, 'audio/wav');
 		},
 
 		getUrl : function(){
