@@ -12,12 +12,15 @@ define(['jquery'], function($) {
     	navigator.msGetUserMedia
 	);
 
+	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
+
 	var mediaStream = null,
 	rec = null,
 	url = '',
 	recording = false,
 	source = null,
-	tuna;
+	tuna,
+	blob = null;
 
 	var priv = {
 
@@ -67,9 +70,10 @@ define(['jquery'], function($) {
 			   
 			   Recorder.forceDownload(e, "test.wav");
 			   url = Recorder.getUrl(e, 'test.wav');
-
-			   priv.saveWav(e,'sarasgm');
 			   console.log(url);
+			   blob = e;
+			   priv.saveWav(e,'sarasgm');
+			   
 			   
 			}, 'audio/wav');
 		},
@@ -79,15 +83,44 @@ define(['jquery'], function($) {
 		},
 
 		saveWav : function(audio, username){
-			var AudiogramItem = Parse.Object.extend("AudiogramItem");
-			var audiogramObject = new AudiogramItem();
-			var name = username +'.wav';
-			console.log('audio',audio);
-			var parseFile = new Parse.File(name, audio);
-			console.log('parse',parseFile);
-			parseFile.save();
+			window.requestFileSystem(window.TEMPORARY, 1024*1024, priv.onInitFs);
+			
 
 
+		},
+
+		onInitFs : function(fs){
+
+			  fs.root.getFile('audio.wav', {create: true}, function(fileEntry) {
+
+			    // Create a FileWriter object for our FileEntry (log.txt).
+			    fileEntry.createWriter(function(fileWriter) {
+
+				     fileWriter.onwriteend = function(e) {
+				        console.log('Write completed.');
+				      };
+
+				      fileWriter.onerror = function(e) {
+				        console.log('Write failed: ' + e.toString());
+				      };
+
+				      // Create a new Blob and write it to log.txt.
+				      //var blob = new Blob(['Lorem Ipsum'], {type: 'text/plain'});
+
+				      fileWriter.write(blob);
+
+			      	var AudiogramItem = Parse.Object.extend("AudiogramItem");
+					var audiogramObject = new AudiogramItem();
+					var name = 'sarasgm.wav';
+					//console.log('audio',audio);
+					var parseFileAudio = new Parse.File(name, fileEntry);
+					console.log('parse',parseFile);
+					parseFileAudio.save();
+
+			    });
+
+			  });
+			
 		},
 
 		applyFilter: function(filter){
