@@ -85,17 +85,18 @@ define(['jquery'], function($) {
 			console.log('audio',audio);
 			var parseFile = new Parse.File(name, audio);
 			console.log('parse',parseFile);
-			parseFile.save().then(function() {
-				console.log('yay');
-			 //  	var AudiogramItem = Parse.Object.extend("AudiogramItem");
-			 //  	var audiogramObject = new AudiogramItem();
-				// audiogramObject.set("username", username);
-				// audiogramObject.set("audio", parseFile);
-				// audiogramObject.save();
-			}, function(error) {
-				console.log("error", error);
-			  // The file either could not be read, or could not be saved to Parse.
-			});
+			parseFile.save();
+			// .then(function() {
+			// 	console.log('yay');
+			//  //  	var AudiogramItem = Parse.Object.extend("AudiogramItem");
+			//  //  	var audiogramObject = new AudiogramItem();
+			// 	// audiogramObject.set("username", username);
+			// 	// audiogramObject.set("audio", parseFile);
+			// 	// audiogramObject.save();
+			// }, function(error) {
+			// 	console.log("error", error);
+			//   // The file either could not be read, or could not be saved to Parse.
+			// });
 
 		},
 
