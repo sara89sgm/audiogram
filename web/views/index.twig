@@ -7,24 +7,20 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-     <link href="../css/main.css" rel="stylesheet" media="screen" />
-     <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="../css/bootstrap.min.css">
+     <link href="../css/main.css" rel="stylesheet" />
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="../scripts/vendor/jquery-2.1.0.min.js"></script>
-<script src="../scripts/vendor/bootstrap.min.js"></script>
+
 
 
 
  
 </head>
 <body>
-
-    <div >
+    {% include 'nav.twig' %}
+    <div class="ag-content" >
 
         <section class="main-button">
             <div class="container-fluid">
@@ -41,6 +37,7 @@
         </section>
         
     </div>
+        {% include 'footer.twig' %}
     <script src="../scripts/recorder.js"></script>
     <script data-main="../scripts/main" src="../scripts/vendor/require.js"></script>
 </body>

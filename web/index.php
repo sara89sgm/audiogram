@@ -29,6 +29,7 @@ $app->get('/', function() use ($app) {
     return $app['twig']->render('index.twig');
 });
 
+
 // $app->get('/journal', function () use ($app) {
 // 	$post = $app['dbs']['mysql_read']->fetchAll('SELECT * from journals');
 
