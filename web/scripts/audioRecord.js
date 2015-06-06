@@ -77,10 +77,12 @@ define(['jquery'], function($) {
 			return url;
 		},
 
-		saveWav : function(e, username){
+		saveWav : function(audio, username){
 			var AudiogramItem = Parse.Object.extend("AudiogramItem");
 			var audiogramObject = new AudiogramItem();
-			var parseFile = new Parse.File(username+'.wav', e);
+			var name = username +'.wav';
+			console.log(audio);
+			var parseFile = new Parse.File(name, audio);
 
 			parseFile.save().then(function() {
 			  	var AudiogramItem = Parse.Object.extend("AudiogramItem");
