@@ -16,7 +16,7 @@ define(['jquery'], function($) {
 	rec = null,
 	url = '',
 	recording = false,
-	source : null,
+	source = null,
 	tuna;
 
 	var priv = {
