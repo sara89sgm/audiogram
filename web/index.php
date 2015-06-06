@@ -36,6 +36,7 @@ $app->get('/', function() use ($app) {
 });
 
 
+
 // $app->get('/journal', function () use ($app) {
 // 	$post = $app['dbs']['mysql_read']->fetchAll('SELECT * from journals');
 
