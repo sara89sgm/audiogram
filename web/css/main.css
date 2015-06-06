@@ -155,19 +155,18 @@ html, body {
 	}
 }
 
-#filter .filter-button {
-		-webkit-border-top-right-radius: inherit;
-		border-top-right-radius: inherit;
-		-webkit-border-bottom-left-radius: inherit;
-		border-bottom-left-radius: inherit;
-		-webkit-border-bottom-right-radius: 0;
-		border-bottom-right-radius: 0;
+.hidden{
+	display: none;
 }
 
 
+#filter .filters .ui-grid-a .ui-block-a, #filter .filters .ui-grid-a .ui-block-b{
+	padding: 15px;
+}
 
-#filter .filters-grid{
-	width: 100%;
+#success h2{
+	vertical-align: middle;
+	text-align: center;
 }
 
 /*****FOOTER*****/

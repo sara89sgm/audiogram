@@ -18,7 +18,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="../scripts/vendor/jquery-2.1.0.min.js"></script>
 <script src="../scripts/jquery.mobile-1.4.5.min.js"></script>
-<script src="../scripts/parse-1.4.2.min.js"></script>
+<script src="../scripts/vendor/parse-1.4.2.min.js"></script>
 
 
 
@@ -33,7 +33,7 @@
 
         <div role="main" class="ui-content">
 
-        <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+        <ul data-role="listview" data-inset="true" class="audio-list ui-listview ui-listview-inset ui-corner-all ui-shadow">
 
              {% for audiogramitem in audiogramitems %}
                 {% include 'audiogramitem.twig' with {'item': audiogramitem} only %}
@@ -63,17 +63,28 @@
 
         {% include 'nav.twig' %}
 
-        <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow filters-grid">
-
+        <div class="filters">
             <div class="ui-grid-a">
-                <div class="ui-block-a"><a href='#' data-filter="2" class="filter-button-a"><div class="ui-bar ui-bar-a filter-button" >Cabinet</div></a></div>
-                <div class="ui-block-b"><a href='#' data-filter="4" class="filter-button-a"><div class="ui-bar ui-bar-a filter-button" >Tremolo</div></a></div>
-                <div class="ui-block-a"><a href='#' data-filter="0" class="filter-button-a"><div class="ui-bar ui-bar-a filter-button" >Chorus</div></a></div>
-                <div class="ui-block-b"><a href='#' data-filter="3" class="filter-button-a"><div class="ui-bar ui-bar-a filter-button" >Valencia</div></a></div>
+                <div class="ui-block-a"><button type="button" data-theme="a" data-filter="2" class="filter-button">Cabinet</button></div>
+                <div class="ui-block-b"><button type="button" data-theme="a" data-filter="4" class="filter-button">Tremolo</button></div>
+                <div class="ui-block-a"><button type="button" data-theme="a" data-filter="0" class="filter-button">Chorus</button></div>
+                <div class="ui-block-b"><button type="button" data-theme="a" data-filter="3" class="filter-button">Valencia</button></div>
+            </div>
+        </div>
 
-            </div><!-- /grid-c -->
 
-        </ul>
+
+        {% include 'footer.twig' %}
+
+    </div><!-- /page one -->
+
+    <div data-role="page" id="success">
+
+        {% include 'nav.twig' %}
+
+
+        <h2> Whoop whooop! Done! Now you can listen to your audiogram and more <a href="#home"> here </a> </h2>
+
 
         {% include 'footer.twig' %}
 

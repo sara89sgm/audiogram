@@ -17,7 +17,8 @@ define(['jquery'], function($) {
 	url = '',
 	recording = false,
 	source = null,
-	tuna;
+	tuna,
+	filter =0;
 
 	var priv = {
 
@@ -36,9 +37,9 @@ define(['jquery'], function($) {
 				}
 			});
 
-			$('.filter-button-a').on('click', function(e){
-				console.log('filter', e);
-				//var filter = e.target.data('filter');
+			$('.filter-button').on('click', function(e){
+
+				filter = e.target.dataset.filter;
 				
 				window.location.hash = '#record';
 			})
@@ -57,7 +58,7 @@ define(['jquery'], function($) {
 			    rec = new Recorder(mediaStreamSource, {
 			      workerPath: '../scripts/recorderWorker.js'
 			    });
-				priv.applyFilter(3);
+				priv.applyFilter(filter);
 			    rec.record();
 			  }, function(err){
 			    console.log('Not supported');
@@ -93,8 +94,10 @@ define(['jquery'], function($) {
 			audiogramObject.set("audioURL", audio);
 			audiogramObject.save(null, {
 				  success: function(gameScore) {
-				    // Execute any logic that should take place after the object is saved.
-				    console.log('New object created with objectId: ' + gameScore.id);
+				  	window.location.hash = '#success';
+				  	priv.addItem(audio,username);
+
+
 				  },
 				  error: function(gameScore, error) {
 				    // Execute any logic that should take place if the save fails.
@@ -103,6 +106,14 @@ define(['jquery'], function($) {
 				  }
 				});
 		},
+
+		addItem : function(audio, username){
+			var html= '<li class="ui-li-has-thumb ui-first-child hidden"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-caret-r"><audio id="player" src="'+audio+'"></audio><h2>'+username+'</h2><p>'+username+'</p></a></li>';
+
+			$('.audio-list').prepend(html);
+			$('li.hidden').delay('400').slideToggle('400');
+		},
+
 
 		applyFilter: function(filter){
 
