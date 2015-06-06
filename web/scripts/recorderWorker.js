@@ -14,6 +14,9 @@ this.onmessage = function(e){
     case 'exportWAV':
       exportWAV(e.data.type);
       break;
+    case 'exportWAV64':
+      exportWAV64(e.data.type);
+      break;
     case 'getBuffer':
       getBuffer();
       break;
@@ -50,6 +53,19 @@ function exportWAV(type){
   var audioBlob = new Blob([dataview], { type: type });
 
   this.postMessage(audioBlob);
+}
+
+function exportWAV64(type){
+  var buffers = [];
+  for (var channel = 0; channel < numChannels; channel++){
+    buffers.push(mergeBuffers(recBuffers[channel], recLength));
+  }
+  if (numChannels === 2){
+      var interleaved = interleave(buffers[0], buffers[1]);
+  } else {
+      var interleaved = buffers[0];
+  }
+  return btoa(JSON.stringify(interleaved));
 }
 
 function getBuffer(){

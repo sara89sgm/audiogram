@@ -12,15 +12,12 @@ define(['jquery'], function($) {
     	navigator.msGetUserMedia
 	);
 
-	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
-
 	var mediaStream = null,
 	rec = null,
 	url = '',
 	recording = false,
 	source = null,
-	tuna,
-	blob = null;
+	tuna;
 
 	var priv = {
 
@@ -68,11 +65,10 @@ define(['jquery'], function($) {
 			rec.exportWAV(function(e){
 			   rec.clear();
 			   
-			   Recorder.forceDownload(e, "test.wav");
-			   url = Recorder.getUrl(e, 'test.wav');
-			   console.log(url);
-			   blob = e;
-			   priv.saveWav(e,'sarasgm');
+			  Recorder.forceDownload(e, "test.wav");
+			  url = Recorder.getUrl(e, 'test.wav');
+			   console.log(e);
+			   priv.saveWav(url,'sarasgm');
 			   
 			   
 			}, 'audio/wav');
@@ -83,46 +79,22 @@ define(['jquery'], function($) {
 		},
 
 		saveWav : function(audio, username){
-			window.requestFileSystem(window.TEMPORARY, 1024*1024, priv.onInitFs);
+
+			var AudiogramItem = Parse.Object.extend("AudiogramItem");
+			var audiogramObject = new AudiogramItem();
+			audiogramObject.set("username", username);
+			audiogramObject.set("audioURL", audio);
+			audiogramObject.save();
+
 			
-
-
 		},
 
-		onInitFs : function(fs){
-
-			  fs.root.getFile('audio.wav', {create: true}, function(fileEntry) {
-
-			    // Create a FileWriter object for our FileEntry (log.txt).
-			    fileEntry.createWriter(function(fileWriter) {
-
-				     fileWriter.onwriteend = function(e) {
-				        console.log('Write completed.');
-				        console.log(e);
-					    var AudiogramItem = Parse.Object.extend("AudiogramItem");
-						var audiogramObject = new AudiogramItem();
-						var name = 'sarasgm.wav';
-						//console.log('audio',audio);
-						var parseFileAudio = new Parse.File(name, fileEntry);
-						console.log('parse',parseFileAudio);
-						parseFileAudio.save();
-				      };
-
-				      fileWriter.onerror = function(e) {
-				        console.log('Write failed: ' + e.toString());
-				      };
-
-				      // Create a new Blob and write it to log.txt.
-				      //var blob = new Blob(['Lorem Ipsum'], {type: 'text/plain'});
-
-				      fileWriter.write(blob);
-
-			      
-
-			    });
-
-			  });
+		playAudio : function(b64){
+			var interleaved = atob(JSON.parse(b64));
+			var buffer = context.createBufferSource();
+			buffer.buffer = interleaved;
 			
+
 		},
 
 		applyFilter: function(filter){
