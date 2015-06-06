@@ -50,7 +50,7 @@ define(['jquery'], function($) {
 			    rec = new Recorder(mediaStreamSource, {
 			      workerPath: '../scripts/recorderWorker.js'
 			    });
-				this.applyFilter(1);
+				priv.applyFilter(1);
 			    rec.record();
 			  }, function(err){
 			    console.log('Not supported');
