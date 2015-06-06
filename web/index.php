@@ -8,10 +8,11 @@ use Symfony\Component\Debug\Debug;
 
 require_once __DIR__.'/../vendor/autoload.php';
 use Parse\ParseClient;
+use Parse\ParseQuery;
 use Parse\ParseObject;
  
 ParseClient::initialize('u4iFjc0mVSgWBiNYJkDgXzeXbKAGIqoz44tGJsAj', 'l5KOSxl9eEDLG2k8ebnfFFLlyYVNv2tPWiCq4tNq', 'cEoeKfQHEH3NIpTdgF5PlOtPyH7Emn27i8IpvW69');
-
+date_default_timezone_set('Europe/Madrid');
 
 // DISABLE THIS IN PRODUCTION
 Debug::enable();
@@ -32,7 +33,13 @@ $app->get('/php', function() {
 
 $app->get('/', function() use ($app) {
 
-    return $app['twig']->render('index.twig');
+    $parse = new ParseQuery('AudiogramItem');
+    $parse->limit(20);  
+    $parse->ascending("createdAt"); 
+    $results = $parse->find();
+    //var_dump($results);
+    //die;
+    return $app['twig']->render('index.twig', array('audiogramitems' => $results));
 });
 
 

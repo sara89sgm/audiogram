@@ -67,7 +67,7 @@ define(['jquery'], function($) {
 			   
 			  Recorder.forceDownload(e, "test.wav");
 			  url = Recorder.getUrl(e, 'test.wav');
-			   console.log(e);
+			   console.log(url);
 			   priv.saveWav(url,'sarasgm');
 			   
 			   
@@ -87,24 +87,14 @@ define(['jquery'], function($) {
 			audiogramObject.save(null, {
 				  success: function(gameScore) {
 				    // Execute any logic that should take place after the object is saved.
-				    alert('New object created with objectId: ' + gameScore.id);
+				    console.log('New object created with objectId: ' + gameScore.id);
 				  },
 				  error: function(gameScore, error) {
 				    // Execute any logic that should take place if the save fails.
 				    // error is a Parse.Error with an error code and message.
-				    alert('Failed to create new object, with error code: ' + error.message);
+				    console.log('Failed to create new object, with error code: ' + error.message);
 				  }
 				});
-
-			
-		},
-
-		playAudio : function(b64){
-			var interleaved = atob(JSON.parse(b64));
-			var buffer = context.createBufferSource();
-			buffer.buffer = interleaved;
-			
-
 		},
 
 		applyFilter: function(filter){

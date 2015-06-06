@@ -35,6 +35,10 @@
 
         <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
 
+             {% for audiogramitem in audiogramitems %}
+                {% include 'audiogramitem.twig' with {'item': audiogramitem} only %}
+            {% endfor %}
+
         </ul>
 
         </div><!-- /content -->
