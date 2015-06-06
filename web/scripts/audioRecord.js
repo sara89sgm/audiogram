@@ -52,10 +52,8 @@ define(['jquery'], function($) {
 		record: function(stream){
 			  navigator.getUserMedia({audio: true}, function(localMediaStream){
 			    mediaStream = localMediaStream;
-			    var mediaStreamSource = context.createMediaStreamSource(localMediaStream);
-			    source = mediaStreamSource;
-			    
-			    rec = new Recorder(mediaStreamSource, {
+			    source = context.createMediaStreamSource(localMediaStream);
+			    rec = new Recorder(source, {
 			      workerPath: '../scripts/recorderWorker.js'
 			    });
 				priv.applyFilter(filter);
@@ -144,7 +142,7 @@ define(['jquery'], function($) {
 			        break;
 			    case 2:
 					var cabinet = new tuna.Cabinet({
-		                  makeupGain: 1,                                 //0 to 20
+		                  makeupGain: 15,                                 //0 to 20
 		                  impulsePath: "impulses/impulse_guitar.wav",    //path to your speaker impulse
 		                  bypass: 0
 		              });
@@ -153,7 +151,7 @@ define(['jquery'], function($) {
 			        break;
 			    case 3:
 		            var phaser = new tuna.Phaser({
-		                rate: 1.2, //0.01 to 8 is a decent range, but higher values are possible
+		                rate: 6, //0.01 to 8 is a decent range, but higher values are possible
 		                depth: 0.8, //0 to 1
 		                feedback: 0.9, //0 to 1+
 		                stereoPhase: 180, //0 to 180
@@ -166,9 +164,9 @@ define(['jquery'], function($) {
 			    case 4:
 
 		            var tremolo = new tuna.Tremolo({
-		                intensity: 0.2, //0 to 1
+		                intensity: 0.9, //0 to 1
 		                rate: 8, //0.001 to 8
-		                stereoPhase: 0, //0 to 180
+		                stereoPhase: 50, //0 to 180
 		                feedback: 0.9, //0 to 1+
 		                bypass: 0
 		            });
