@@ -34,6 +34,17 @@ define(['jquery'], function($) {
 					$(recordButtonSelector).text('Stop Recording');
 					recording = true;
 				}
+			});
+
+			$('.filter-button-a').on('click', function(e){
+				console.log('filter', e);
+				//var filter = e.target.data('filter');
+				
+				$.changePage( "#record", {
+				  transition: "slide",
+				  reverse: false,
+				  changeHash: true
+				});
 			})
 
 
@@ -125,17 +136,13 @@ define(['jquery'], function($) {
 					convolver.connect(rec.node);
 			        break;
 			    case 2:
-			    	var wahwah = new tuna.WahWah({
-		                automode: true, //true/false
-		                baseFrequency: 0.5, //0 to 1
-		                excursionOctaves: 3, //1 to 6
-		                sweep: 0, //0 to 1
-		                resonance: 2, //1 to 100
-		                sensitivity: 1, //-1 to 1
-		                bypass: 0
-		            });
-		          	source.connect(wahwah.input);
-					wahwah.connect(rec.node);
+					var cabinet = new tuna.Cabinet({
+		                  makeupGain: 1,                                 //0 to 20
+		                  impulsePath: "impulses/impulse_guitar.wav",    //path to your speaker impulse
+		                  bypass: 0
+		              });
+		          	source.connect(cabinet.input);
+					cabinet.connect(rec.node);
 			        break;
 			    case 3:
 		            var phaser = new tuna.Phaser({

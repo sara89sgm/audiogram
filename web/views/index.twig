@@ -63,11 +63,15 @@
 
         {% include 'nav.twig' %}
 
-        <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+        <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow filters-grid">
 
-             {% for audiogramitem in audiogramitems %}
-                {% include 'audiogramitem.twig' with {'item': audiogramitem} only %}
-            {% endfor %}
+            <div class="ui-grid-a">
+                <div class="ui-block-a"><a href='#' data-filter="2" class="filter-button-a"><div class="ui-bar ui-bar-a filter-button" >Cabinet</div></a></div>
+                <div class="ui-block-b"><a href='#' data-filter="4" class="filter-button-a"><div class="ui-bar ui-bar-a filter-button" >Tremolo</div></a></div>
+                <div class="ui-block-a"><a href='#' data-filter="0" class="filter-button-a"><div class="ui-bar ui-bar-a filter-button" >Chorus</div></a></div>
+                <div class="ui-block-b"><a href='#' data-filter="3" class="filter-button-a"><div class="ui-bar ui-bar-a filter-button" >Valencia</div></a></div>
+
+            </div><!-- /grid-c -->
 
         </ul>
 
