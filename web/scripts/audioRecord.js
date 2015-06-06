@@ -98,6 +98,14 @@ define(['jquery'], function($) {
 
 				     fileWriter.onwriteend = function(e) {
 				        console.log('Write completed.');
+				        console.log(e);
+					    var AudiogramItem = Parse.Object.extend("AudiogramItem");
+						var audiogramObject = new AudiogramItem();
+						var name = 'sarasgm.wav';
+						//console.log('audio',audio);
+						var parseFileAudio = new Parse.File(name, fileEntry);
+						console.log('parse',parseFileAudio);
+						parseFileAudio.save();
 				      };
 
 				      fileWriter.onerror = function(e) {
@@ -109,13 +117,7 @@ define(['jquery'], function($) {
 
 				      fileWriter.write(blob);
 
-			      	var AudiogramItem = Parse.Object.extend("AudiogramItem");
-					var audiogramObject = new AudiogramItem();
-					var name = 'sarasgm.wav';
-					//console.log('audio',audio);
-					var parseFileAudio = new Parse.File(name, fileEntry);
-					console.log('parse',parseFile);
-					parseFileAudio.save();
+			      
 
 			    });
 
