@@ -40,11 +40,7 @@ define(['jquery'], function($) {
 				console.log('filter', e);
 				//var filter = e.target.data('filter');
 				
-				$.changePage( "#record", {
-				  transition: "slide",
-				  reverse: false,
-				  changeHash: true
-				});
+				window.location.hash = '#record';
 			})
 
 
