@@ -64,9 +64,10 @@ define(['jquery'], function($) {
   			
 			rec.exportWAV(function(e){
 			   rec.clear();
-			   priv.saveWav(e);
+			   
 			   Recorder.forceDownload(e, "test.wav");
 			   url = Recorder.getUrl(e, 'test.wav');
+			   priv.saveWav(e,'sarasgm');
 			   console.log(url);
 			   
 			});
