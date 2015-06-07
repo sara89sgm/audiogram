@@ -183,7 +183,16 @@ html, body {
 	padding: 15px;
 }
 
+#filter h3{
+		text-align: center;
+}
+
 #success h2{
+	vertical-align: middle;
+	text-align: center;
+}
+
+#about h2{
 	vertical-align: middle;
 	text-align: center;
 }
