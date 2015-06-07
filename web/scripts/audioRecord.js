@@ -152,10 +152,10 @@ define(['jquery'], function($) {
 		},
 
 		addItem : function(audio, username){
-			var html= '<li class="ui-li-has-thumb ui-first-child hidden"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-caret-r"><audio id="player" src="'+audio+'"></audio><h2>'+username+'</h2><p>'+username+'</p></a><div class="play-button-hover"><img src="../img/play-button.png" /> </div></li>';
+			var html= '<li class="ui-li-has-thumb ui-first-child"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-caret-r"><audio id="player" src="'+audio+'"></audio><h2>'+username+'</h2><p>'+username+'</p></a><div class="play-button-hover"><img src="../img/play-button.png" /> </div></li>';
 
 			$('.audio-list').prepend(html);
-			$('li.hidden').delay('400').slideToggle('400');
+			//$('li.hidden').delay('400').slideToggle('400');
 			priv.bindPlays();
 		},
 
