@@ -53,15 +53,18 @@ define(['jquery'], function($) {
 		},
 
 		bindPlays : function(){
-			$('.audio-players').on('click', function(e){
-				if(!e.target.firstChild.paused){
-					e.target.firstChild.stop();
+			$('.play-button-hover').on('click', function(e){
+				console.log(e.target);
+				var au = e.target.parent().parent().find(audio);
+				console.log(au);
+				if(!au.paused){
+					au.stop();
 				}else{
-					e.target.firstChild.play();
+					au.play();
 				}
 				
 			});
-		}
+		},
 
 		record: function(stream){
 			  navigator.getUserMedia({audio: true}, function(localMediaStream){

@@ -37,13 +37,14 @@ html, body {
     float:left;
     position:relative
 }
-#home .ui-listview li:hover .play{display:block}
+#home .ui-listview li:hover .play-button-hover{display:block}
 #home .play-button-hover{
   position : absolute;
     display:none;
     top:20%; 
     width:40px;
-    margin:0 auto; left:0px;
+    margin:0 auto; 
+    left:0px;
     right:0px;
     z-index:100
 } 
