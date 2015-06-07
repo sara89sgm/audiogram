@@ -93,18 +93,18 @@ define(['jquery'], function($) {
 			mixerTrack.rec.createWad();  
 			//mediaStream.stop();
   			//rec.stop();
-  			console.log(mixerTrack.rec.recordings[0]);
+  			console.log(mixerTrack.rec.recordings);
   			
-			// mixerTrack.rec.exportWAV(function(e){
-			//    mixerTrack.rec.clear();
+			mixerTrack.rec.exportWAV(function(e){
+			   mixerTrack.rec.clear();
 			   
-			//   Recorder.forceDownload(e, "test.wav");
-			//   url = Recorder.getUrl(e, 'test.wav');
-			//    console.log(url);
-			//    priv.saveWav(url,'sarasgm');
+			  Recorder.forceDownload(e, "test.wav");
+			  url = Recorder.getUrl(e, 'test.wav');
+			   console.log(url);
+			   priv.saveWav(url,'sarasgm');
 			   
 			   
-			// }, 'audio/wav');
+			}, 'audio/wav');
 		},
 
 		getUrl : function(){
