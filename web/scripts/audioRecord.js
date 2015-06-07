@@ -205,7 +205,7 @@ define(['jquery'], function($) {
 		        	source.connect(tremolo.input);
 					src_return = tremolo;
 			        break;
-			        
+
 			  	default:
 
 		            var tremolo = new tuna.Tremolo({
@@ -220,7 +220,7 @@ define(['jquery'], function($) {
 			        break;
 
 			}
-		return src_return;
+		return src_return.output;
 
 		}
 
