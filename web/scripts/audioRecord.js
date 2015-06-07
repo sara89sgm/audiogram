@@ -62,7 +62,7 @@ define(['jquery'], function($) {
 			 //  }, function(err){
 			 //    console.log('Not supported');
 			 //  });
-			Wad.defaultImpulse = "https://midemaudiogram.herokuapp.com/scripts/impulses/matrix-reverb6.wav";
+			Wad.defaultImpulse = "scripts/impulses/matrix-reverb6.wav";
 			var voice = new Wad({
 			    source  : 'mic',
 			    reverb  : {
@@ -82,7 +82,7 @@ define(['jquery'], function($) {
 			    }
 			});
 			mixerTrack.add(voice);
-
+			
 			mixerTrack.rec.record();         // Start recording output from this PolyWad.
 			voice.play();           // Make some noise!
 			            // Take a break.
@@ -90,20 +90,21 @@ define(['jquery'], function($) {
 
 		stop: function() {
 			mixerTrack.rec.stop();   
+			mixerTrack.rec.createWad();  
 			//mediaStream.stop();
   			//rec.stop();
-
+  			console.log(mixerTrack.rec.recordings[0]);
   			
-			mixerTrack.rec.exportWAV(function(e){
-			   mixerTrack.rec.clear();
+			// mixerTrack.rec.exportWAV(function(e){
+			//    mixerTrack.rec.clear();
 			   
-			  Recorder.forceDownload(e, "test.wav");
-			  url = Recorder.getUrl(e, 'test.wav');
-			   console.log(url);
-			   priv.saveWav(url,'sarasgm');
+			//   Recorder.forceDownload(e, "test.wav");
+			//   url = Recorder.getUrl(e, 'test.wav');
+			//    console.log(url);
+			//    priv.saveWav(url,'sarasgm');
 			   
 			   
-			}, 'audio/wav');
+			// }, 'audio/wav');
 		},
 
 		getUrl : function(){
