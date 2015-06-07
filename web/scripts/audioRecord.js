@@ -53,14 +53,14 @@ define(['jquery'], function($) {
 		},
 
 		bindPlays : function(){
-			$('.audio-players').on('click', function(e)){
+			$('.audio-players').on('click', function(e){
 				if(!e.target.firstChild.paused){
 					e.target.firstChild.stop();
 				}else{
 					e.target.firstChild.play();
 				}
 				
-			}
+			});
 		}
 
 		record: function(stream){
