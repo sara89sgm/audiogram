@@ -96,7 +96,7 @@ define(['jquery'], function($) {
   	// 		console.log(mixerTrack.rec.recordings);
   			
 			rec.exportWAV(function(e){
-			   mixerTrack.rec.clear();
+			   rec.clear();
 			   
 			  Recorder.forceDownload(e, "test.wav");
 			  url = Recorder.getUrl(e, 'test.wav');
