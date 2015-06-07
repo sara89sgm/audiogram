@@ -19,6 +19,7 @@ define(['jquery'], function($) {
 	source = null,
 	tuna,
 	filter =0;
+	var mixerTrack = null;
 
 	var priv = {
 
@@ -50,26 +51,51 @@ define(['jquery'], function($) {
 		},
 
 		record: function(stream){
-			  navigator.getUserMedia({audio: true}, function(localMediaStream){
-			    mediaStream = localMediaStream;
-			    source = context.createMediaStreamSource(localMediaStream);
-			    rec = new Recorder(source, {
-			      workerPath: '../scripts/recorderWorker.js'
-			    });
-				priv.applyFilter(filter);
-			    rec.record();
-			  }, function(err){
-			    console.log('Not supported');
-			  });
+			 //  navigator.getUserMedia({audio: true}, function(localMediaStream){
+			 //    mediaStream = localMediaStream;
+			 //    source = context.createMediaStreamSource(localMediaStream);
+			 //    rec = new Recorder(source, {
+			 //      workerPath: '../scripts/recorderWorker.js'
+			 //    });
+				// priv.applyFilter(filter);
+			 //    rec.record();
+			 //  }, function(err){
+			 //    console.log('Not supported');
+			 //  });
+			Wad.defaultImpulse = "https://midemaudiogram.herokuapp.com/scripts/impulses/matrix-reverb6.wav";
+			var voice = new Wad({
+			    source  : 'mic',
+			    reverb  : {
+			        wet : .7
+			    },
+			    filter  : {
+			        type      : 'highpass',
+			        frequency : 700
+			    },
+			    panning : -.2
+			});
+
+
+			mixerTrack = new Wad.Poly({
+			    recConfig : { // The Recorder configuration object. The only required property is 'workerPath'.
+			        workerPath : 'scripts/recorderWorker.js' // The path to the Recorder.js web worker script.
+			    }
+			});
+			mixerTrack.add(voice);
+
+			mixerTrack.rec.record();         // Start recording output from this PolyWad.
+			voice.play();           // Make some noise!
+			            // Take a break.
 		},
 
 		stop: function() {
-			mediaStream.stop();
-  			rec.stop();
+			mixerTrack.rec.stop();   
+			//mediaStream.stop();
+  			//rec.stop();
 
   			
-			rec.exportWAV(function(e){
-			   rec.clear();
+			mixerTrack.rec.exportWAV(function(e){
+			   mixerTrack.rec.clear();
 			   
 			  Recorder.forceDownload(e, "test.wav");
 			  url = Recorder.getUrl(e, 'test.wav');
@@ -142,8 +168,9 @@ define(['jquery'], function($) {
 			        break;
 			    case 2:
 					var cabinet = new tuna.Cabinet({
-		                  makeupGain: 15,                                 //0 to 20
-		                  impulsePath: "impulses/impulse_guitar.wav",    //path to your speaker impulse
+		                  makeupGain: 15,
+		                  delay: 0.0045,                                 //0 to 20
+		                  impulsePath: "impulses/matrix-reverb6.wav",    //path to your speaker impulse
 		                  bypass: 0
 		              });
 		          	source.connect(cabinet.input);
