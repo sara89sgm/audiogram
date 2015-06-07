@@ -54,10 +54,11 @@ define(['jquery'], function($) {
 			  navigator.getUserMedia({audio: true}, function(localMediaStream){
 			    mediaStream = localMediaStream;
 			    source = context.createMediaStreamSource(localMediaStream);
-			    rec = new Recorder(source, {
+			    priv.applyFilter(filter);
+			    rec = new Recorder(context.destination, {
 			      workerPath: '../scripts/recorderWorker.js'
 			    });
-				priv.applyFilter(filter);
+				
 			    rec.record();
 			  }, function(err){
 			    console.log('Not supported');
