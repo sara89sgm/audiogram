@@ -54,8 +54,8 @@ define(['jquery'], function($) {
 			  navigator.getUserMedia({audio: true}, function(localMediaStream){
 			    mediaStream = localMediaStream;
 			    source = context.createMediaStreamSource(localMediaStream);
-			    priv.applyFilter(filter);
-			    rec = new Recorder(context.destination, {
+			    var src = priv.applyFilter(filter);
+			    rec = new Recorder(src, {
 			      workerPath: '../scripts/recorderWorker.js'
 			    });
 				
@@ -142,7 +142,7 @@ define(['jquery'], function($) {
 
 
 		applyFilter: function(filter){
-
+			var src_return = null;
 
 			switch(filter){
 				  case 0:
@@ -153,7 +153,7 @@ define(['jquery'], function($) {
 		                 bypass: 0
 		             });
 			        source.connect(chorus.input);
-					chorus.connect(context.destination);
+					src_return = chorus;
 			        break;
 			    case 1:
 					var convolver = new tuna.Convolver({
@@ -166,7 +166,8 @@ define(['jquery'], function($) {
 	                    bypass: 0
 	                });
 			        source.connect(convolver.input);
-					convolver.connect(context.destination);
+			        src_return = convolver;
+					//convolver.connect(context.destination);
 			        break;
 			    case 2:
 					var cabinet = new tuna.Cabinet({
@@ -176,7 +177,7 @@ define(['jquery'], function($) {
 		                  bypass: 0
 		              });
 		          	source.connect(cabinet.input);
-					cabinet.connect(context.destination);
+					src_return = cabinet;
 			        break;
 			    case 3:
 		            var phaser = new tuna.Phaser({
@@ -188,7 +189,7 @@ define(['jquery'], function($) {
 		                bypass: 0
 		            });
 		        	source.connect(phaser.input);
-					phaser.connect(context.destination);
+					src_return = phaser;
 			        break;
 			    case 4:
 
@@ -200,10 +201,11 @@ define(['jquery'], function($) {
 		                bypass: 0
 		            });
 		        	source.connect(tremolo.input);
-					tremolo.connect(context.destination);
+					src_return = tremolo;
 			        break;
 
 			}
+		return src_return;
 
 		}
 
