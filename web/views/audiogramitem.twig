@@ -1,8 +1,9 @@
 
 <li class="ui-li-has-thumb ui-first-child"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-caret-r audio-players">
-    <audio id="{{item.get('audioURL')}}"class="player-audio-audio" src="{{item.get('audioURL')}}"></audio>
+    <audio controls class="player-audio-audio">
+    <source src="{{item.get('audioURL')}}"></audio>
 	<h2>{{item.get('username')}}</h2>
     <p>{{item.get('username')}}</p>
 </a>
-<div class="play-button-hover"><img data-id="{{item.get('audioURL')}}" src="../img/play-button.png" /> </div></li>
+<div class="play-button-hover"><img src="../img/play-button.png" /> </div></li>
         	
