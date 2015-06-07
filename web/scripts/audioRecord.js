@@ -139,10 +139,12 @@ define(['jquery'], function($) {
 			audiogramObject.save(null, {
 				  success: function(gameScore) {
 				  	window.location.hash = '#success';
+				  	var h2 = document.createElement('h2');
 				  	var au = document.createElement('audio');
 				  	au.controls = true;
       				au.src = audio;
-				  	$('#success').append(au);
+      				h2.appendChild(au);
+				  	$('#success').append(h2);
 				  	priv.addItem(audio,username);
 
 
