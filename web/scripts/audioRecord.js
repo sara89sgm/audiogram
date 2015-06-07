@@ -51,51 +51,51 @@ define(['jquery'], function($) {
 		},
 
 		record: function(stream){
-			 //  navigator.getUserMedia({audio: true}, function(localMediaStream){
-			 //    mediaStream = localMediaStream;
-			 //    source = context.createMediaStreamSource(localMediaStream);
-			 //    rec = new Recorder(source, {
-			 //      workerPath: '../scripts/recorderWorker.js'
-			 //    });
-				// priv.applyFilter(filter);
-			 //    rec.record();
-			 //  }, function(err){
-			 //    console.log('Not supported');
-			 //  });
-			Wad.defaultImpulse = "scripts/impulses/matrix-reverb6.wav";
-			var voice = new Wad({
-			    source  : 'mic',
-			    reverb  : {
-			        wet : .7
-			    },
-			    filter  : {
-			        type      : 'highpass',
-			        frequency : 700
-			    },
-			    panning : -.2
-			});
+			  navigator.getUserMedia({audio: true}, function(localMediaStream){
+			    mediaStream = localMediaStream;
+			    source = context.createMediaStreamSource(localMediaStream);
+			    rec = new Recorder(source, {
+			      workerPath: '../scripts/recorderWorker.js'
+			    });
+				priv.applyFilter(filter);
+			    rec.record();
+			  }, function(err){
+			    console.log('Not supported');
+			  });
+			// Wad.defaultImpulse = "scripts/impulses/matrix-reverb6.wav";
+			// var voice = new Wad({
+			//     source  : 'mic',
+			//     reverb  : {
+			//         wet : .7
+			//     },
+			//     filter  : {
+			//         type      : 'highpass',
+			//         frequency : 700
+			//     },
+			//     panning : -.2
+			// });
 
 
-			mixerTrack = new Wad.Poly({
-			    recConfig : { // The Recorder configuration object. The only required property is 'workerPath'.
-			        workerPath : 'scripts/recorderWorker.js' // The path to the Recorder.js web worker script.
-			    }
-			});
-			mixerTrack.add(voice);
+			// mixerTrack = new Wad.Poly({
+			//     recConfig : { // The Recorder configuration object. The only required property is 'workerPath'.
+			//         workerPath : 'scripts/recorderWorker.js' // The path to the Recorder.js web worker script.
+			//     }
+			// });
+			// mixerTrack.add(voice);
 			
-			mixerTrack.rec.record();         // Start recording output from this PolyWad.
-			voice.play();           // Make some noise!
-			            // Take a break.
+			// mixerTrack.rec.record();         // Start recording output from this PolyWad.
+			// voice.play();           // Make some noise!
+			//             // Take a break.
 		},
 
 		stop: function() {
-			mixerTrack.rec.stop();   
-			mixerTrack.rec.createWad();  
-			//mediaStream.stop();
-  			//rec.stop();
-  			console.log(mixerTrack.rec.recordings);
+			// mixerTrack.rec.stop();   
+			// mixerTrack.rec.createWad();  
+			mediaStream.stop();
+  			rec.stop();
+  	// 		console.log(mixerTrack.rec.recordings);
   			
-			mixerTrack.rec.exportWAV(function(e){
+			rec.exportWAV(function(e){
 			   mixerTrack.rec.clear();
 			   
 			  Recorder.forceDownload(e, "test.wav");
