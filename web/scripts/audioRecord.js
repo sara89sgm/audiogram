@@ -54,11 +54,10 @@ define(['jquery'], function($) {
 			  navigator.getUserMedia({audio: true}, function(localMediaStream){
 			    mediaStream = localMediaStream;
 			    source = context.createMediaStreamSource(localMediaStream);
-			    priv.applyFilter(filter);
 			    rec = new Recorder(source, {
 			      workerPath: '../scripts/recorderWorker.js'
 			    });
-				
+				priv.applyFilter(filter);
 			    rec.record();
 			  }, function(err){
 			    console.log('Not supported');
@@ -153,7 +152,7 @@ define(['jquery'], function($) {
 		                 bypass: 0
 		             });
 			        source.connect(chorus.input);
-					chorus.connect(rec.node);
+					chorus.connect(context.destination);
 			        break;
 			    case 1:
 					var convolver = new tuna.Convolver({
@@ -166,7 +165,7 @@ define(['jquery'], function($) {
 	                    bypass: 0
 	                });
 			        source.connect(convolver.input);
-					convolver.connect(rec.node);
+					convolver.connect(context.destination);
 			        break;
 			    case 2:
 					var cabinet = new tuna.Cabinet({
@@ -176,7 +175,7 @@ define(['jquery'], function($) {
 		                  bypass: 0
 		              });
 		          	source.connect(cabinet.input);
-					cabinet.connect(rec.node);
+					cabinet.connect(context.destination);
 			        break;
 			    case 3:
 		            var phaser = new tuna.Phaser({
@@ -188,7 +187,7 @@ define(['jquery'], function($) {
 		                bypass: 0
 		            });
 		        	source.connect(phaser.input);
-					phaser.connect(rec.node);
+					phaser.connect(context.destination);
 			        break;
 			    case 4:
 
@@ -200,7 +199,7 @@ define(['jquery'], function($) {
 		                bypass: 0
 		            });
 		        	source.connect(tremolo.input);
-					tremolo.connect(rec.node);
+					tremolo.connect(context.destination);
 			        break;
 
 			}
