@@ -162,14 +162,15 @@ define(['jquery'], function($) {
 
 			switch(filter){
 				  case 0:
-				  	var chorus = new tuna.Chorus({
-		                 rate: 1.5,
-		                 feedback: 0.2,
-		                 delay: 0.0045,
-		                 bypass: 0
-		             });
-			        source.connect(chorus.input);
-					src_return = chorus;
+					var echo = new tuna.Echo({
+		                  makeupGain: 15,
+		                  delay: 0.0045,                                 //0 to 20
+		                  impulsePath: "impulses/LargeWideEchoHall.wav",    //path to your speaker impulse
+		                  bypass: 0
+		              });
+		          	source.connect(echo.input);
+					src_return = echo;
+	
 			        break;
 			    case 1:
 					var convolver = new tuna.Convolver({
