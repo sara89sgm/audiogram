@@ -54,9 +54,9 @@ define(['jquery'], function($) {
 
 		bindPlays : function(){
 			$('.play-button-hover').on('click', function(e){
-				console.log(e);
-				var au = $(e.currentTarget.parentElement).find('.player-audio-audio').0;
-				console.log($(au));
+				console.log(e.target.dataset.id);
+				var au = $('#'+e.target.dataset.id);
+				console.log(au);
 				if(!au.paused){
 					au.stop();
 				}else{
@@ -152,7 +152,7 @@ define(['jquery'], function($) {
 		},
 
 		addItem : function(audio, username){
-			var html= '<li class="ui-li-has-thumb ui-first-child"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-caret-r"><audio class="player-audio-audio" src="'+audio+'"></audio><h2>'+username+'</h2><p>'+username+'</p></a><div class="play-button-hover"><img src="../img/play-button.png" /> </div></li>';
+			var html= '<li class="ui-li-has-thumb ui-first-child"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-caret-r"><audio id="'+audio+'" class="player-audio-audio" src="'+audio+'"></audio><h2>'+username+'</h2><p>'+username+'</p></a><div class="play-button-hover"><img data-id="'+audio+'" src="../img/play-button.png" /> </div></li>';
 
 			$('.audio-list').prepend(html);
 			//$('li.hidden').delay('400').slideToggle('400');
