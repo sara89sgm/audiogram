@@ -55,6 +55,8 @@ define(['jquery'], function($) {
 			    mediaStream = localMediaStream;
 			    source = context.createMediaStreamSource(localMediaStream);
 			    var src = priv.applyFilter(filter);
+			    console.log(src);
+			    console.log(filter);
 			    rec = new Recorder(src, {
 			      workerPath: '../scripts/recorderWorker.js'
 			    });
@@ -192,6 +194,19 @@ define(['jquery'], function($) {
 					src_return = phaser;
 			        break;
 			    case 4:
+
+		            var tremolo = new tuna.Tremolo({
+		                intensity: 0.9, //0 to 1
+		                rate: 8, //0.001 to 8
+		                stereoPhase: 50, //0 to 180
+		                feedback: 0.9, //0 to 1+
+		                bypass: 0
+		            });
+		        	source.connect(tremolo.input);
+					src_return = tremolo;
+			        break;
+			        
+			  	default:
 
 		            var tremolo = new tuna.Tremolo({
 		                intensity: 0.9, //0 to 1
