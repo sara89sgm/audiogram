@@ -54,7 +54,7 @@ define(['jquery'], function($) {
 
 		bindPlays : function(){
 			$('.play-button-hover').on('click', function(e){
-				console.log(e.currentTarget.parentElement);
+				console.log(e.currentTarget);
 				var au = e.currentTarget.parentElement;
 				console.log(au);
 				if(!au.paused){
