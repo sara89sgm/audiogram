@@ -1,7 +1,14 @@
 
-<li class="ui-li-has-thumb ui-first-child"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-caret-r">
+<li class="ui-li-has-thumb ui-first-child"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-caret-r audio-players" onclick="this.firstChild.play()">
     <audio id="player" src="{{item.get('audioURL')}}"></audio>
 	<h2>{{item.get('username')}}</h2>
     <p>{{item.get('username')}}</p>
-</a></li>
+</a>
+<div class="play-button-hover"><img src="../img/play-button.png" /> </div></li>
         	
+
+
+            <div class="itemsContainer">
+    <div class="image"> <a href="#">  <img src="http://www.itsalif.info/blogfiles/video-play/vthumb.jpg" /> </a></div>
+    <div class="play"><img src="http://cdn1.iconfinder.com/data/icons/flavour/button_play_blue.png" /> </div>
+</div>
